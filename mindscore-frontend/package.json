@@ -2,7 +2,7 @@
   "name": "mindscore-frontend",
   "version": "1.0.0",
   "private": true,
-  "proxy": "http://127.0.0.1:8000",
+  "proxy": "https://mindscore-1-9x62.onrender.com",
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
