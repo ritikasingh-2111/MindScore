@@ -1,0 +1,15 @@
+.loading { text-align: center; padding: 72px 16px; animation: fadeIn 0.5s ease; }
+.loading h3 { font-size: 1.6rem; margin-top: 28px; }
+.loading p { color: var(--muted); margin-top: 8px; }
+.loader { position: relative; width: 110px; height: 110px; margin: 0 auto; }
+.loader .core {
+  position: absolute; inset: 32px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--lav-300), var(--mint-300));
+  animation: breathe 2s ease-in-out infinite;
+}
+.loader .ring { position: absolute; inset: 0; border-radius: 50%; border: 3px solid transparent; }
+.loader .r1 { border-top-color: var(--lav-500); animation: spin 1.4s linear infinite; }
+.loader .r2 { inset: 12px; border-bottom-color: var(--mint-500); animation: spin 2s linear infinite reverse; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes breathe { 50% { transform: scale(1.18); opacity: 0.85; } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }

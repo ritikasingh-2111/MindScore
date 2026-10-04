@@ -1,0 +1,61 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(251, 250, 255, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(143, 123, 220, 0.14);
+}
+.navbar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  position: relative;
+}
+.brand { display: flex; align-items: center; gap: 12px; color: var(--ink); }
+.brand-mark {
+  width: 38px; height: 38px; border-radius: 12px;
+  background:
+    radial-gradient(circle at 30% 30%, #fff 0 14%, transparent 15%),
+    linear-gradient(135deg, var(--lav-500), var(--mint-500));
+  box-shadow: 0 6px 16px rgba(143, 123, 220, 0.35);
+}
+.brand-text { display: flex; flex-direction: column; line-height: 1.15; }
+.brand-name { font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; }
+.brand-tag { font-size: 0.72rem; color: var(--muted); }
+
+.nav-links { display: flex; align-items: center; gap: 6px; }
+.nav-links a:not(.btn) {
+  padding: 8px 14px; border-radius: 10px; font-weight: 500; color: var(--muted);
+  transition: color 0.2s, background 0.2s;
+}
+.nav-links a:not(.btn):hover { color: var(--lav-700); background: var(--lav-50); }
+.nav-cta { margin-left: 10px; padding: 10px 20px; }
+
+.menu-toggle {
+  display: none; background: none; border: 0; color: var(--ink);
+  width: 44px; height: 44px; border-radius: 12px; cursor: pointer;
+}
+
+@media (max-width: 1020px) { .brand-tag { display: none; } }
+
+@media (max-width: 860px) {
+  .menu-toggle { display: grid; place-items: center; }
+  .nav-links {
+    position: absolute; top: 100%; left: 12px; right: 12px;
+    flex-direction: column; align-items: stretch; gap: 4px;
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid var(--line); border-radius: 18px;
+    padding: 12px; box-shadow: var(--shadow-lg);
+    opacity: 0; pointer-events: none; transform: translateY(-8px);
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .nav-links.open { opacity: 1; pointer-events: auto; transform: none; }
+  .nav-links a:not(.btn) { padding: 14px; }
+  .nav-cta { margin: 6px 0 0; justify-content: center; }
+}

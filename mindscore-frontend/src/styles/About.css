@@ -1,0 +1,12 @@
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+.about-copy h2 { font-size: clamp(1.8rem, 3.4vw, 2.6rem); margin-bottom: 18px; }
+.about-copy p { color: var(--muted); font-size: 1.08rem; max-width: 52ch; }
+.about-copy .about-note { margin-top: 16px; font-size: 0.98rem; padding-left: 16px; border-left: 3px solid var(--mint-300); }
+.facts { list-style: none; margin: 0; padding: 8px 28px; background: rgba(255, 255, 255, 0.7); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 6px 20px rgba(91, 74, 158, 0.07); }
+.facts li { display: flex; gap: 16px; padding: 20px 0; align-items: flex-start; }
+.facts li + li { border-top: 1px solid var(--line); }
+.fact-icon { flex: none; width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center; color: var(--lav-700); background: var(--lav-100); }
+.facts li:nth-child(even) .fact-icon { background: var(--mint-100); color: #2f8d70; }
+.facts h3 { font-family: var(--font-body); font-weight: 600; font-size: 1.02rem; }
+.facts p { color: var(--muted); font-size: 0.93rem; }
+@media (max-width: 860px) { .about-grid { grid-template-columns: 1fr; gap: 32px; } .facts { padding: 4px 18px; } }

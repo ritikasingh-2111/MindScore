@@ -1,0 +1,53 @@
+.hero { padding: 72px 24px 56px; }
+.hero-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1.05fr 0.95fr; align-items: center; gap: 48px;
+}
+.hero-copy h1 {
+  font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.hero-sub { margin-top: 22px; font-size: 1.12rem; color: var(--muted); max-width: 54ch; }
+.hero-actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 14px; }
+.hero-note { margin-top: 20px; font-size: 0.88rem; color: var(--muted); }
+
+.hero-visual { position: relative; max-width: 480px; margin-left: auto; width: 100%; }
+.hero-art { width: 100%; height: auto; display: block; }
+.art-spin { transform-origin: 220px 220px; animation: spin 48s linear infinite; }
+
+.chip {
+  position: absolute; display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px; border-radius: 16px;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: var(--shadow-md);
+  font-size: 0.92rem; line-height: 1.25;
+}
+.chip strong { display: block; color: var(--ink); }
+.chip small { color: var(--muted); font-size: 0.78rem; }
+.chip-icon {
+  width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center;
+  background: var(--lav-100); color: var(--lav-700);
+}
+.chip-b .chip-icon { background: var(--mint-100); color: #2f8d70; }
+.chip-c .chip-icon { background: #e4eefc; color: #4a78bd; }
+.chip-a { top: 6%; left: -4%; }
+.chip-b { top: 44%; right: -6%; }
+.chip-c { bottom: 6%; left: 4%; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 920px) {
+  .hero { padding-top: 44px; }
+  .hero-inner { grid-template-columns: 1fr; gap: 32px; }
+  .hero-visual { margin: 0 auto; max-width: 420px; }
+  .chip-a { left: 0; } .chip-b { right: 0; } .chip-c { left: 2%; }
+}
+@media (max-width: 520px) {
+  .hero-actions .btn { flex: 1 1 100%; }
+  .chip { padding: 8px 12px; gap: 8px; }
+  .chip small { display: none; }
+}
