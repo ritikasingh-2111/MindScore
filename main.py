@@ -5,44 +5,60 @@ from fastapi import FastAPI
 from typing import Literal
 from fastapi.middleware.cors import CORSMiddleware
 
+
 app = FastAPI()
 
+
+# Allow requests from the React frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "https://your-app.vercel.app"],
+    allow_origins=[
+        "http://localhost:3000",
+        "https://mind-score-sigma.vercel.app"
+    ],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-model = joblib.load('Mental_Health_Model.pkl')
 
-app = FastAPI()
+# Load trained ML model
+model = joblib.load("Mental_Health_Model.pkl")
 
 
 class StudentData(BaseModel):
     Age: int = Field(..., ge=10, le=100)
 
-    Gender: Literal['Male', 'Female', 'Other']
+    Gender: Literal["Male", "Female", "Other"]
 
     Country: str
 
     Academic_Level: Literal[
-        'Undergraduate',
-        'Graduate',
-        'High School'
+        "Undergraduate",
+        "Graduate",
+        "High School"
     ]
 
     Most_Used_Platform: Literal[
-        'Facebook', 'LinkedIn', 'Instagram', 'Snapchat',
-        'Twitter', 'YouTube', 'TikTok', 'LINE',
-        'KakaoTalk', 'VKontakte', 'WhatsApp', 'WeChat'
+        "Facebook",
+        "LinkedIn",
+        "Instagram",
+        "Snapchat",
+        "Twitter",
+        "YouTube",
+        "TikTok",
+        "LINE",
+        "KakaoTalk",
+        "VKontakte",
+        "WhatsApp",
+        "WeChat"
     ]
 
     Purpose_Of_Use: Literal[
-        'Networking',
-        'Education',
-        'Entertainment',
-        'News'
+        "Networking",
+        "Education",
+        "Entertainment",
+        "News"
     ]
 
     Avg_Daily_Usage_Hours: float = Field(..., ge=0, le=24)
@@ -56,10 +72,10 @@ class StudentData(BaseModel):
     Sleep_Hours_Per_Night: float = Field(..., ge=0, le=24)
 
     Stress_Level: Literal[
-        'Medium',
-        'Low',
-        'Very High',
-        'High'
+        "Medium",
+        "Low",
+        "Very High",
+        "High"
     ]
 
 
@@ -67,42 +83,50 @@ class PredictionResponse(BaseModel):
     predicted_mental_health_score: float
 
 
-@app.get('/')
+@app.get("/")
 def greet():
     return {
-        'message': 'Hello, welcome to the Mental Health Prediction API!'
+        "message": "Hello, welcome to the Mental Health Prediction API!"
     }
 
 
 top_countries = [
-    'Other', 'India', 'USA', 'Canada', 'Australia',
-    'UK', 'Germany', 'Turkey', 'Mexico', 'France'
+    "Other",
+    "India",
+    "USA",
+    "Canada",
+    "Australia",
+    "UK",
+    "Germany",
+    "Turkey",
+    "Mexico",
+    "France"
 ]
 
 
-@app.post('/predict', response_model=PredictionResponse)
+@app.post("/predict", response_model=PredictionResponse)
 def predict(data: StudentData):
 
     country_group = (
         data.Country
         if data.Country in top_countries
-        else 'Other'
+        else "Other"
     )
 
     input_row = pd.DataFrame([{
-        'Age': data.Age,
-        'Gender': data.Gender,
-        'Country': data.Country,
-        'Academic_Level': data.Academic_Level,
-        'Most_Used_Platform': data.Most_Used_Platform,
-        'Purpose_Of_Use': data.Purpose_Of_Use,
-        'Avg_Daily_Usage_Hours': data.Avg_Daily_Usage_Hours,
-        'Daily_Unlocks': data.Daily_Unlocks,
-        'Study_Hours': data.Study_Hours,
-        'Physical_Activity_Hours': data.Physical_Activity_Hours,
-        'Sleep_Hours_Per_Night': data.Sleep_Hours_Per_Night,
-        'Stress_Level': data.Stress_Level,
-        'Grouped_country': country_group
+        "Age": data.Age,
+        "Gender": data.Gender,
+        "Country": data.Country,
+        "Academic_Level": data.Academic_Level,
+        "Most_Used_Platform": data.Most_Used_Platform,
+        "Purpose_Of_Use": data.Purpose_Of_Use,
+        "Avg_Daily_Usage_Hours": data.Avg_Daily_Usage_Hours,
+        "Daily_Unlocks": data.Daily_Unlocks,
+        "Study_Hours": data.Study_Hours,
+        "Physical_Activity_Hours": data.Physical_Activity_Hours,
+        "Sleep_Hours_Per_Night": data.Sleep_Hours_Per_Night,
+        "Stress_Level": data.Stress_Level,
+        "Grouped_Country": country_group
     }])
 
     prediction = model.predict(input_row)[0]
